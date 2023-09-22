@@ -1,35 +1,34 @@
 
-import Button from "./Components/Button"
-import clarus from "./imgs/clarus_blue.png"
+// import Button from "./Components/Button"
+import { useQuery } from 'react-query';
+import { QueryClient, QueryClientProvider } from "react-query"
 
+
+import Header from "./Components/Header";
+import Form from "./Components/Form";
+import Navbar from "./Components/Navbar";
+
+const queryClient = new QueryClient()
 
 function App() {
 
   return (
-    <div className="App">
-      <div className="container mx-auto">
+    <QueryClientProvider client={queryClient}>
 
-        <div class="grid grid-rows-4 grid-flow-col gap-4 bg-blue-500 my-4">
-          <img className="wd-20 h-20 row-span-4 " src={clarus} />
-        </div>
-        <div className="navbar">
-          <nav class="bg-blue-500 p-4">
-            <div class="flex items-center justify-between">
-              <div class=" space-x-4">
-                <a href="#" class="text-white hover:text-gray-300">Home</a>
-                <a href="#" class="text-white hover:text-gray-300">Select Data</a>
-                <a href="#" class="text-white hover:text-gray-300">Interact</a>
-              </div>
+      <div className="App">
+        <div className="container mx-auto">
+          {/* adding the following components to the page  */}
+          <Header />
+          <Navbar />
+          <Form />
+          <div className="grid grid-rows-4 grid-flow-col gap-4">
+            <div className="row-span-4  ">
             </div>
-          </nav>
+          </div>
         </div>
-
-        grid
-
-
       </div>
-    </div>
 
+    </QueryClientProvider>
   );
 }
 
