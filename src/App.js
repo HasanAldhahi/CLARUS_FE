@@ -1,12 +1,12 @@
 
 // import Button from "./Components/Button"
-import { useQuery } from 'react-query';
 import { QueryClient, QueryClientProvider } from "react-query"
 
 
 import Header from "./Components/Header";
-import Form from "./Components/Form";
+// import Form from "./Components/Form";
 import Navbar from "./Components/Navbar";
+import Session from './Components/Session';
 
 const queryClient = new QueryClient()
 
@@ -20,7 +20,8 @@ function App() {
           {/* adding the following components to the page  */}
           <Header />
           <Navbar />
-          <Form />
+          {/* <Form /> */}
+          <Session />
           <div className="grid grid-rows-4 grid-flow-col gap-4">
             <div className="row-span-4  ">
             </div>

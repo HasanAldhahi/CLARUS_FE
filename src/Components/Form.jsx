@@ -1,18 +1,15 @@
 import { upload } from '@testing-library/user-event/dist/upload';
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { useQuery } from 'react-query';
+
 
 
 // This component fetches data from the server
 
-
-
-
-
-const DatasetSelector = () => {
+const Form = () => {
 
     // Query the Data 
-     const { dataSets, isLoading, isError } = useQuery('myDataKey', fetchDataFunction);
+     const { data, isLoading, isError } = useQuery('myDataKey', fetchDataFunction);
      const [selectedDataset, setSelectedDataset] = useState(''); // To store the selected dataset
     
   // Handler for dataset selection
@@ -27,7 +24,7 @@ const DatasetSelector = () => {
     console.log('Selected Dataset:', selectedDataset);
   };
 
-
+  console.log(data);
   if (isLoading) {
     return <p>Loading...</p>;
   }
@@ -36,7 +33,14 @@ const DatasetSelector = () => {
     return <p>Error fetching data</p>;
   }
 
+  let dataset_options = data.map((d, index) => (
+              <option key={index} value={d}>
+                {d}
+              </option>
+            ))
+
   return (
+   
     <div>
        <div>
       <h2>Choose a Dataset to Upload</h2>
@@ -45,11 +49,8 @@ const DatasetSelector = () => {
           <label htmlFor="chooseDataset">Select a Dataset:</label>
           <select id="chooseDataset" name="chooseDataset" onChange={handleDatasetChange} value={selectedDataset}>
             <option value="">Select a dataset</option>
-            {dataSets.map((dataset, index) => (
-              <option key={index} value={dataset}>
-                {dataset}
-              </option>
-            ))}
+           { dataset_options.map((dataset) => (dataset))};
+
           </select>
         </div>
         <div>
@@ -59,29 +60,20 @@ const DatasetSelector = () => {
         </div>
       </form>
     </div>
-  );
     </div>
   );
-
-
-  //   use useState hook 
-// To store the selected dataset
-
- 
 };
-
-
-    
-
 
 async function fetchDataFunction() {
   try {
     const response = await fetch('http://127.0.0.1:5000//data/dataset_name');
+    
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
 
     const data = await response.json();
+    // console.log(data);
     return data;
   } catch (error) {
     // Handle any errors that occurred during the fetch
@@ -89,4 +81,4 @@ async function fetchDataFunction() {
   }
 }
 
-export default DatasetSelector;
+export default Form;
