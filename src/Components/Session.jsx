@@ -8,6 +8,8 @@ import Form from './Form';
 import axios from 'axios';
 import { QueryClient } from "react-query"
 
+// import Upload from './Upload';	
+
 
 // const queryClient = new QueryClient()
 
@@ -62,9 +64,10 @@ function Session() {
 
   return (
     <div>
-    
-      <Form/> 
-
+      {console.log(data)}
+      <Form data={data} />
+      {/* <Upload /> */}
+      
     </div>
   );
 }

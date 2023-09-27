@@ -20,8 +20,8 @@ function App() {
           {/* adding the following components to the page  */}
           <Header />
           <Navbar />
-          {/* <Form /> */}
           <Session />
+          <div id="cy"></div>
           <div className="grid grid-rows-4 grid-flow-col gap-4">
             <div className="row-span-4  ">
             </div>
