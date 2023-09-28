@@ -21,7 +21,6 @@ function App() {
           <Header />
           <Navbar />
           <Session />
-
           <div className="grid grid-rows-4 grid-flow-col gap-4">
             <div className="row-span-4  ">
             </div>
