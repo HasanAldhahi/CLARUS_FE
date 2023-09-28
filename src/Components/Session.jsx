@@ -1,13 +1,10 @@
 import React from 'react';
 
 
-import { useQueries } from '@tanstack/react-query';
+
 import { useQuery } from 'react-query';
 
 import Form from './Form';
-import axios from 'axios';
-import { QueryClient } from "react-query"
-
 
 // const queryClient = new QueryClient()
 
@@ -50,7 +47,7 @@ import { QueryClient } from "react-query"
 
 function Session() {
 
-    const { data, isLoading, isError } = useQuery('myDataKey', fetchDataFunction);
+    const { data, isLoading, isError } = useQuery('tokens', fetchDataFunction);
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -59,17 +56,13 @@ function Session() {
   if (isError) {
     return <p>Error fetching data</p>;
   }
-
   return (
     <div>
-    
-      <Form/> 
-
+      {console.log("thsi si the data i am passing from session to Form", data)}
+      <Form  token = {data}/> 
     </div>
   );
 }
-
-
 async function fetchDataFunction() {
   try {
     const response = await fetch('http://127.0.0.1:5000');
@@ -78,6 +71,7 @@ async function fetchDataFunction() {
     }
 
     const data = await response.json();
+    console.log("Fetching data" + data)
     return data;
   } catch (error) {
     // Handle any errors that occurred during the fetch

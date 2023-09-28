@@ -1,62 +1,105 @@
-import { upload } from '@testing-library/user-event/dist/upload';
+
 import  { useState } from 'react';
 import { useQuery } from 'react-query';
+import Button from './Button';
+import { useMutation, useQueryClient } from 'react-query';
 
 
 
 // This component fetches data from the server
 
-const Form = () => {
+const Form = ({token}) => {
 
     // Query the Data 
-     const { data, isLoading, isError } = useQuery('myDataKey', fetchDataFunction);
+     const { data, isLoading_, isError_ } = useQuery('myDataKey', fetchDataFunction);
      const [selectedDataset, setSelectedDataset] = useState(''); // To store the selected dataset
+      const [isLoading, setIsLoading] = useState(false);
+      const queryClient = useQueryClient();
+
+    
+
+
     
   // Handler for dataset selection
   const handleDatasetChange = (event) => {
     setSelectedDataset(event.target.value);
   };
 
+  console.log("thsi si the toke", token)
   // Handler for form submission (you can upload the selected dataset here)
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // You can perform the upload or other actions here
-    console.log('Selected Dataset:', selectedDataset);
+   const HandleMutation = (dateObject) => {
+    return useMutation(
+      async () => {
+        // Your mutation logic here, e.g., making an API request
+             const response = await fetch(`${token}/data/patient_name`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        // Add any necessary headers and data here
+        // body: JSON.stringify(dateObject)
+      });
+
+
+        if (!response.ok) {
+          throw new Error('Mutation failed');
+        }
+
+        // Invalidate and refetch related queries
+        queryClient.invalidateQueries('yourQueryKey');
+
+        // Return the updated data if needed
+        return response.json();
+      },
+      {
+        onSuccess: (data) => {
+          // Handle success, if needed
+          console.log('Mutation succeeded!', data);
+        },
+      }
+    );
   };
 
+   const mutation = HandleMutation({ dataset_name: 'selectedDataset' });
+
+
   console.log(data);
-  if (isLoading) {
+  if (isLoading_) {
     return <p>Loading...</p>;
   }
 
-  if (isError) {
+  if (isError_) {
     return <p>Error fetching data</p>;
   }
 
-  let dataset_options = data.map((d, index) => (
-              <option key={index} value={d}>
-                {d}
-              </option>
-            ))
 
   return (
-   
     <div>
        <div>
       <h2>Choose a Dataset to Upload</h2>
-      <form onSubmit={handleSubmit}>
+      <form >
         <div>
           <label htmlFor="chooseDataset">Select a Dataset:</label>
           <select id="chooseDataset" name="chooseDataset" onChange={handleDatasetChange} value={selectedDataset}>
             <option value="">Select a dataset</option>
-           { dataset_options.map((dataset) => (dataset))};
-
+            {console.log(data)}
+            { Object.entries(data).map(([id, value]) => (
+      
+              <option key={id} >
+                {value}
+              </option>
+            ))
+          }
           </select>
         </div>
         <div>
-          <button onClick={upload} type="submit" disabled={!selectedDataset}>
-            Upload
-          </button>
+           <Button text ={"Upload"}  onClick ={(e) => {
+            e.preventDefault();
+          mutation.mutate(); // Trigger the mutation
+        }}
+        disabled={mutation.isLoading}
+      >
+        {mutation.isLoading ? 'Loading...' : 'Cool Blue Button'} </Button>
         </div>
       </form>
     </div>
@@ -71,7 +114,6 @@ async function fetchDataFunction() {
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
-
     const data = await response.json();
     // console.log(data);
     return data;
