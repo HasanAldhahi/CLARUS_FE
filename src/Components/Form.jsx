@@ -6,7 +6,8 @@ import { useQuery } from "react-query";
 function Form({ token }) {
   const { data, isLoading, isError } = useQuery("datalist", fetchDataFunction);
   const [selectedDataset, setSelectedDataset] = useState("");
-  const [patientList, setPatientList] = useState();
+  const [patientList, setPatientList] = useState([]);
+  const [isVisible, setIsVisible] = useState(false);
 
   // Functions for handling state changes
   // for saving the value of the field for the data set name
@@ -20,24 +21,31 @@ function Form({ token }) {
 
     event.preventDefault();
     console.log(`/data/name`);
-    const response = await fetch(`http://127.0.0.1:5000/data/name`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name: selectedDataset }),
-    })
-      .then((response) => {
-        // Access and use the response data here
+    const patientList = await fetch(
+      `http://127.0.0.1:5000/${token}/data/patient_name`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name: selectedDataset }),
+      }
+    ).then((response) => {
+      // Access and use the response data here
+      // response = await response.json();
+      console.log(response);
+      if (response.ok) {
+        response = response.json();
         console.log(response);
-        console.log("fuck yes");
-        // setPatientList(response);
-        return response;
-      })
-      .catch((error) => {
-        // Handle errors
-        console.error("Error:", error);
-      });
+        setIsVisible(true);
+      } else {
+        console.log("There is an error with the response");
+      }
+
+      return response;
+    });
+
+    setPatientList(patientList);
   };
 
   // for final rendering the components
@@ -75,6 +83,16 @@ function Form({ token }) {
           </div>
         </form>
       </div>
+      {isVisible && (
+        <div>
+          <h2>List of Names:</h2>
+          <ul>
+            {patientList.map((name, index) => (
+              <li key={index}>{name}</li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
