@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from "react-query"
 import Header from "./Components/Header";
 import Navbar from "./Components/Navbar";
 import Session from './Components/Session';
-import Form from "./Components/Form";
+import Form from "./Components/Forml";
 
 const queryClient = new QueryClient()
 
