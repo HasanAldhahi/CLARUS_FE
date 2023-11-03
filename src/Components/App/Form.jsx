@@ -5,6 +5,7 @@ import { useQuery } from "react-query";
 
 function Form({ token }) {
   const { data, isLoading, isError } = useQuery("datalist", fetchDataFunction);
+  const [isLoadingPatient, setLoadingPatient] = useState(false);
   const [selectedDataset, setSelectedDataset] = useState("");
   const [patientList, setPatientList] = useState([]);
   const [isVisible, setIsVisible] = useState(false);
@@ -18,8 +19,8 @@ function Form({ token }) {
   // for the Button when u press and send the name of the dataset to the server
   const upload = async (event) => {
     // const todo = { selectedDataset };
-
     event.preventDefault();
+    setLoadingPatient(true);
     console.log(`/data/name`);
     const patientList = await fetch(
       `http://127.0.0.1:5000/${token}/data/patient_name`,
@@ -38,6 +39,7 @@ function Form({ token }) {
         response = response.json();
         console.log(response);
         setIsVisible(true);
+        setLoadingPatient(false);
       } else {
         console.log("There is an error with the response");
       }
@@ -49,7 +51,6 @@ function Form({ token }) {
   };
 
   // for final rendering the components
-
   if (isLoading) {
     return <p>Loading...</p>;
   }
@@ -82,7 +83,16 @@ function Form({ token }) {
             </button>
           </div>
         </form>
+        <div>
+          {isLoadingPatient && (
+            <div
+              style={{ borderTopColor: "transparent" }}
+              className="w-16 h-16 border-4 border-blue-400 border-solid rounded-full animate-spin"
+            ></div>
+          )}
+        </div>
       </div>
+
       {isVisible && (
         <div>
           <h2>List of Names:</h2>
