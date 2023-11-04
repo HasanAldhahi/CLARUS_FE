@@ -4,6 +4,7 @@ import Faq from "./Faq";
 import Solutions from "./Solutions";
 import BackGradients from "./BackGradients";
 import NavBar from "./NavBar";
+import { useEffect } from "react";
 
 const Home = ({ isDarkMode }) => {
   // const switchToDifferentTheme = (theme) => {
@@ -14,9 +15,11 @@ const Home = ({ isDarkMode }) => {
   //   return window["theme"];
   // }
 
-  if (isDarkMode == true) {
-    window.Theme();
-  }
+  // useEffect(() => {
+  //   if (isDarkMode) {
+  //     document.body.classList.contains("dark-theme");
+  //   }
+  // }, [isDarkMode]);
 
   return (
     <>
