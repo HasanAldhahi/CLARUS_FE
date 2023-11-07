@@ -3,8 +3,7 @@ import How from "./How";
 import Faq from "./Faq";
 import Solutions from "./Solutions";
 import BackGradients from "./BackGradients";
-import NavBar from "./NavBar";
-import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Home = ({ isDarkMode }) => {
   // const switchToDifferentTheme = (theme) => {
@@ -23,7 +22,7 @@ const Home = ({ isDarkMode }) => {
 
   return (
     <>
-      <div className="flex text-center justify-center items-center flex-col pt-[90px] ">
+      <div className="flex text-center justify-center items-center flex-col pt-[20px] ">
         <div className="z-10 mb-80 lg:mt-60 mobile:mt-40">
           <div className=" font-bold txt-light mobile:text-[40px] sm:mt-60 lg:text-[60px] sm:text-[60px]">
             Introducing
@@ -42,10 +41,10 @@ const Home = ({ isDarkMode }) => {
             {/* <div className="type mobile:w-[179px] w-auto">problems solved...</div> */}
           </div>
           <button className="text-white back-main px-[80px] py-[15px] mt-10 rounded-md text-[25px] hover:bg-blue-400 active:bg-blue-500 transition-all">
-            Try it now
+            <Link to="/about">Try it now</Link>
           </button>
         </div>
-        <div>
+        {/* <div>
           <div className=" z-10 font-bold txt-main mt-[10rem] mobile:text-[40px] lg:text-[64px] mobile:flex-col flex lg:flex-row">
             Your confidentiality{" "}
             <span className="txt-light ">&nbsp;is our priority</span>
@@ -53,7 +52,7 @@ const Home = ({ isDarkMode }) => {
           <button className="text-white back-main px-[80px] py-[15px] mt-10 mb-80 rounded-md text-[25px]  hover:bg-blue-400 active:bg-blue-500 transition-all">
             View more
           </button>
-        </div>
+        </div> */}
         <How />
         <Faq />
         <Solutions />

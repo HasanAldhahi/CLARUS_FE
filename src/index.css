@@ -16,7 +16,7 @@ body {
     --secondary-color: #000000;
     --ternary-color-1: #a4a3a3;
     --ternary-color-2: #747474;
-    --main-color: #4D77FF;
+    --main-color: rgb(29 187 244);
 
     --opacity-primary: 1;
     --opacity-secondary: 1;
@@ -80,7 +80,7 @@ body {
     --primary-color: #070707;
     --ternary-color-2: #a4a3a3;
     --ternary-color-1: #747474;
-    --main-color: #4D77FF;
+    --main-color: rgb(29 187 244);
     --opacity-secondary: 0.3;
     --opacity-primary: 0.5;
 
@@ -90,12 +90,12 @@ body {
 
 /*-----------------------------------------------gradients for the backdrop---------------------------------------------------*/
 .gradient__blue {
-    background: linear-gradient(45deg, #b9c9ff 0%, #4964ff 100%);
+    background: linear-gradient(45deg, #b9c9ff 0%, #1DBBF4 100%);
     filter: blur(120px);
 }
 
 .gradient__blue2 {
-    background: linear-gradient(45deg, #b9c9ff 0%, #4964ff 100%);
+    background: linear-gradient(45deg, #b9c9ff 0%, #1DBBF4 100%);
     filter: blur(120px);
 }
 

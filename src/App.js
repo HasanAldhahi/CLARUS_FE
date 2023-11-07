@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 
 import Layout from './Components/App/Layout';
-import Upload  from './Components/App/Upload';
+import Debug  from './Components/App/Debug';
 import NavBar from './Components/Design/NavBar';
 import Home from './Components/Design/Home';
 
@@ -28,7 +28,6 @@ function App() {
        <Router>
                 <NavBar />
     <Routes>
- 
           <Route path="/" exact element={<Home />} />
           <Route path="/about" element={<Layout />} />
     </Routes>

@@ -1,4 +1,9 @@
 import React from "react";
+import one from "../../imgs/one.png";
+import two from "../../imgs/two.png";
+import three from "../../imgs/three.png";
+import four from "../../imgs/four.png";
+import { Link } from "react-router-dom";
 
 const How = () => {
   return (
@@ -10,7 +15,7 @@ const How = () => {
         <div className="flex flex-col items-center justify-center px-10 lg:px-10 lg:flex-col mobile:flex-row mobile:px-0">
           <img
             className="mb-9 mobile:pr-4 lg:pr-0 lg:w-[157px] mobile:w-[20vw]"
-            src="../imgs/one.png"
+            src={one}
             alt=""
           />
           <div className="txt-light lg:text-[2rem] mobile:text-[1rem] text-center">
@@ -20,7 +25,7 @@ const How = () => {
         <div className="flex flex-col items-center justify-center px-10 lg:px-10 lg:flex-col mobile:flex-row mobile:px-0">
           <img
             className="mb-9 mobile:pr-4 lg:pr-0 lg:w-[157px] mobile:w-[20vw]"
-            src="../../public/assets/male-blue.png"
+            src={two}
             alt=""
           />
           <div className="txt-light lg:text-[2rem] mobile:text-[1rem] text-center">
@@ -30,7 +35,7 @@ const How = () => {
         <div className="flex flex-col items-center justify-center lg:px-10 lg:flex-col mobile:flex-row mobile:px-0 ">
           <img
             className="mb-9 mobile:pr-4 lg:pr-0 lg:w-[157px] mobile:w-[20vw]"
-            src="../../public/assets/conversation-blue.png"
+            src={three}
             alt=""
           />
           <div className="txt-light lg:text-[2rem] mobile:text-[1rem] text-center">
@@ -40,7 +45,7 @@ const How = () => {
         <div className="flex flex-col items-center justify-center px-10 lg:px-10 lg:flex-col mobile:flex-row mobile:px-0">
           <img
             className="mb-9 mobile:pr-4 lg:pr-0 lg:w-[157px] mobile:w-[20vw]"
-            src="../imgs/one.png"
+            src={four}
             alt=""
           />
           <div className="txt-light lg:text-[2rem] mobile:text-[1rem] text-center">
