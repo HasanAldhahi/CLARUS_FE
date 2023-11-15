@@ -17,6 +17,7 @@ import Home from './Components/Design/Home';
 import clarus from "./imgs/clarus_blue.png";
 import { Link } from "react-router-dom";
 import Session from "./Components/App/Session";
+import Counter from "./Redux/features/counter/Counter"
 const queryClient = new QueryClient()
 
 function App() { 
@@ -30,6 +31,7 @@ function App() {
     <Routes>
           <Route path="/" exact element={<Home />} />
           <Route path="/about" element={<Layout />} />
+          <Route path="/Redux" element={<Counter />} />
     </Routes>
     </Router>
   </QueryClientProvider>

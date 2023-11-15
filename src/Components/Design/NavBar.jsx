@@ -33,6 +33,11 @@ const NavBar = ({ setIsDarkMode, isDarkMode }) => {
             App
           </li>
         </Link>
+        <Link to="/Redux">
+          <li className="list-none mx-5 hover:border-b-4 border-blue-600 cursor-pointer mobile:text-xs lg:text-base p-2 transition-all">
+            Redux
+          </li>
+        </Link>
 
         {/* <li className="list-none mx-5 hover:border-b-4 border-blue-600 cursor-pointer mobile:text-xs lg:text-base p-2 transition-all">
             <button
