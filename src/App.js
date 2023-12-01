@@ -10,7 +10,7 @@ import { useState } from "react";
 import Layout from './Components/App/Layout';
 import Debug  from './Components/App/Debug';
 import NavBar from './Components/Design/NavBar';
-import Home from './Components/Design/Home';
+import Home from './Components/App/Home';
 
 
 

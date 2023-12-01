@@ -1,11 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit'
 import counterReducer from './features/counter/counterSlice'
- const Store = configureStore({
+import sessionReducer from './features/session/sessionSlice'
+import formReducer from './features/form/formReducer'
+
+
+ const store = configureStore({
   reducer: {
    counter: counterReducer,
+   session: sessionReducer,
+   dataSetListNames: formReducer,
   },
 })
 
 
-export default Store;
+export default store;
 

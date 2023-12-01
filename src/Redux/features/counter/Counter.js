@@ -44,16 +44,10 @@ const Counter = () => {
             -
          </button>
         </div>
-
-<div/>
-
+    <div/>
     </section>
     
     </>
-
-
-
-
   )
 }
 

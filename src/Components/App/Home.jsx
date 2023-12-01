@@ -1,8 +1,8 @@
 import React from "react";
-import How from "./How";
-import Faq from "./Faq";
-import Solutions from "./Solutions";
-import BackGradients from "./BackGradients";
+import How from "../Design/How";
+import Faq from "../Design/Faq";
+import Solutions from "../Design/Solutions";
+import BackGradients from "../Design/BackGradients";
 import { Link } from "react-router-dom";
 
 const Home = ({ isDarkMode }) => {

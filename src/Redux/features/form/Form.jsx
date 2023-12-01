@@ -2,10 +2,21 @@ import React from "react";
 import { useEffect, useState } from "react";
 
 import { useQuery } from "react-query";
+import { fetchForm } from "./formSlice";
+import { useDispatch, useSelector } from "react-redux";
 
+// YourReactComponent.js
 function Form({ token }) {
   console.log("This is the token", token);
-  const { data, isLoading, isError } = useQuery("datalist", fetchDataFunction);
+
+  const dispatch = useDispatch();
+  const { data, status, error } = useSelector((state) => {
+    console.log("We are inside Form ");
+    console.log(state);
+    return state.session;
+  });
+
+  //   These useState are only needed here and the actual patientList will be in the Form JS
   const [isLoadingPatient, setLoadingPatient] = useState(false);
   const [selectedDataset, setSelectedDataset] = useState("");
   const [patientList, setPatientList] = useState([]);
@@ -16,6 +27,10 @@ function Form({ token }) {
   const handleDatasetChange = (event) => {
     setSelectedDataset(event.target.value);
   };
+
+  useEffect(() => {
+    dispatch(fetchForm());
+  }, []);
 
   // for the Button when u press and send the name of the dataset to the server
   const upload = async (event) => {
@@ -44,20 +59,28 @@ function Form({ token }) {
       } else {
         console.log("There is an error with the response");
       }
-
       return response;
     });
-
     setPatientList(patientList);
   };
 
   // for final rendering the components
-  if (isLoading) {
-    return <p>Loading...</p>;
+
+  if (status === "loading") {
+    return (
+      <div
+        style={{ borderTopColor: "transparent" }}
+        className="w-16 h-16 border-4 border-blue-400 border-solid rounded-full animate-spin"
+      ></div>
+    );
   }
 
-  if (isError) {
-    return <p>Error fetching data</p>;
+  if (status === "failed") {
+    return (
+      <>
+        <p>Error</p>
+      </>
+    );
   }
   return (
     <div>
@@ -109,20 +132,20 @@ function Form({ token }) {
 }
 
 // for fetching the dataset names for the
-async function fetchDataFunction() {
-  try {
-    const response = await fetch("http://127.0.0.1:5000//data/dataset_name");
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
+// async function fetchDataFunction() {
+//   try {
+//     const response = await fetch("http://127.0.0.1:5000//data/dataset_name");
+//     if (!response.ok) {
+//       throw new Error("Network response was not ok");
+//     }
 
-    const data = await response.json();
-    console.log("Fetching data" + data);
-    return data;
-  } catch (error) {
-    // Handle any errors that occurred during the fetch
-    throw new Error("Error fetching data: " + error.message);
-  }
-}
+//     const data = await response.json();
+//     console.log("Fetching data" + data);
+//     return data;
+//   } catch (error) {
+//     // Handle any errors that occurred during the fetch
+//     throw new Error("Error fetching data: " + error.message);
+//   }
+// }
 
 export default Form;

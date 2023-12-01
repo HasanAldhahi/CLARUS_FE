@@ -1,6 +1,7 @@
 import React from "react";
 
-import Session from "./Session";
+// import Session from "./Session";
+import Session from "../../Redux/features/session/Session";
 
 function Layout() {
   return (
