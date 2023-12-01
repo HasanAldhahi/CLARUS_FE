@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { fetchForm } from "./formSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { setPatient } from "./formSlice";
 
 // YourReactComponent.js
 function Form({ token }) {
@@ -62,6 +63,7 @@ function Form({ token }) {
       return response;
     });
     setPatientList(patientList);
+    dispatch(setPatient(patientList));
   };
 
   // for final rendering the components

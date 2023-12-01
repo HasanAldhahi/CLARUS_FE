@@ -42,5 +42,5 @@ export const fetchform = createAsyncThunk('form/fetchform', async () => {
 
 
 
-
+export const  {setPatient} =  formSlice.actions
 export default formSlice.reducer
