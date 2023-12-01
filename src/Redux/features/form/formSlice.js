@@ -13,7 +13,9 @@ const formSlice = createSlice({
     patientList: [],
   },
   reducers: {
-    setPatient:
+    setPatient: (state, action) => {
+      state.patientList = action.payload
+    },
   },
   extraReducers: (builder) => {
     builder
