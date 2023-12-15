@@ -18,6 +18,7 @@ import clarus from "./imgs/clarus_blue.png";
 import { Link } from "react-router-dom";
 import Session from "./Components/App/Session";
 import Counter from "./Redux/features/counter/Counter"
+import Interact from "./Redux/features/interact/Interact";
 const queryClient = new QueryClient()
 
 function App() { 
@@ -32,6 +33,7 @@ function App() {
           <Route path="/" exact element={<Home />} />
           <Route path="/about" element={<Layout />} />
           <Route path="/Redux" element={<Counter />} />
+          <Route path = "/Interact" element = {<Interact />}></Route>
     </Routes>
     </Router>
   </QueryClientProvider>

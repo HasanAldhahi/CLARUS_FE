@@ -2,7 +2,7 @@ import React from "react";
 
 import { useQuery } from "react-query";
 
-import Form from "./Form";
+import Form from "../../Redux/features/form/Form";
 import { Link } from "react-router-dom";
 
 function Session() {

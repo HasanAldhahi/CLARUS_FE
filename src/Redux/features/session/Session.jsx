@@ -1,19 +1,15 @@
 import React from "react";
-import Form from "../../../Components/App/Form";
+import Form from "../form/Form";
 import { Link } from "react-router-dom";
 
 import { fetchSession } from "./sessionSlice";
-
 // YourReactComponent.js
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 function Session() {
-  // console.log("Session", data);
   const dispatch = useDispatch();
-  const { data, status, error } = useSelector((state) => {
-    console.log("Hello ");
-    console.log(state.session);
+  const { token, status, error } = useSelector((state) => {
     return state.session;
   });
 
@@ -52,9 +48,9 @@ function Session() {
 
   return (
     <div>
-      {console.log("thsi si the data i am passing from session to Form", data)}
+      {console.log("thsi si the data i am passing from session to Form", token)}
 
-      <Form token={data} />
+      <Form token={token} />
     </div>
   );
 }

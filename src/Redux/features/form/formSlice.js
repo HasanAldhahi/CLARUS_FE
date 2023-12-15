@@ -2,6 +2,8 @@
 import { configureStore, createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from "axios";
 // Define the initial state and the slice using createSlice
+// import { useDispatch, useSelector } from "react-redux";
+
 
 
 const formSlice = createSlice({
@@ -9,19 +11,29 @@ const formSlice = createSlice({
   initialState: {
     dataList: [],
     status: 'idle',
+    status_dataSet: "idle",
     error: null,
     patientList: [],
+    dataSet: [],
+    dataName: "",
   },
+
   reducers: {
     setPatient: (state, action) => {
       state.patientList = action.payload
     },
-  },
+    setDataName: (state , action) => {
+      state.dataName = action.payload
+  }
+},
+
   extraReducers: (builder) => {
+
     builder
+    // for fetchin the form
       .addCase(fetchform.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.data = action.payload;
+        state.dataList = action.payload;
       })
       .addCase(fetchform.pending, (state) => {
         state.status = 'loading';
@@ -29,18 +41,20 @@ const formSlice = createSlice({
       .addCase(fetchform.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
-      });
+      })
+      
+      // for fetching the data set
+
+
   },
 });
-
 // Create an async thunk using createAsyncThunk
 export const fetchform = createAsyncThunk('form/fetchform', async () => {
-    return axios.get("http://127.0.0.1:5000//data/dataset_name")
+  
+    return axios.get("http://127.0.0.1:5000/data/dataset_name")
     .then(res=>res.data);
 });
 
 
-
-
-export const  {setPatient} =  formSlice.actions
+export const  {setPatient, setDataName} =  formSlice.actions
 export default formSlice.reducer

@@ -5,7 +5,7 @@ import axios from "axios";
 const sessionSlice = createSlice({
   name: 'session',
   initialState: {
-    data: [],
+    token: "",
     status: 'idle',
     error: null,
   },
@@ -14,7 +14,7 @@ const sessionSlice = createSlice({
     builder
       .addCase(fetchSession.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.data = action.payload;
+        state.token = action.payload;
       })
       .addCase(fetchSession.pending, (state) => {
         state.status = 'loading';
