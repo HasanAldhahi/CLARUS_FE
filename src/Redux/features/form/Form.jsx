@@ -18,21 +18,16 @@ import { useNavigate } from "react-router-dom";
 // ########################################################################################################################
 function Form({ token }) {
   const dispatch = useDispatch();
-  const {
-    dataList,
-    status,
-    status_dataSet,
-    error,
-    patientList,
-    dataSet,
-    dataName,
-  } = useSelector((state) => {
-    return state.form;
-  });
+  const { dataList, status, error, patientList, dataSet, dataName } =
+    useSelector((state) => {
+      console.log(state);
+      return state.form;
+    });
 
-  const { patientDataList, patientsGraphData } = useSelector((state) => {
-    return state.patient;
-  });
+  const { patientDataList, patientsGraphData, status_graph, status_dataSet } =
+    useSelector((state) => {
+      return state.patient;
+    });
 
   //   These useState are only needed here and the actual patientList will be in the Form JS
 
@@ -80,9 +75,7 @@ function Form({ token }) {
       // Access and use the response data here
       if (response.ok) {
         response = response.json();
-        setIsVisible(true);
         console.log("list finished spinner off");
-        setLoadingPatient(false);
       } else {
         console.log("There is an error with the response");
       }
@@ -110,13 +103,25 @@ function Form({ token }) {
     //3. Patient Data in Patient List to be displayed in the form
 
     dispatch(setPatient(List));
+    console.log("this is the list", List);
     console.log(patientList);
     // 4. Graph Knowledge of the patient
     // this is for the drop down menu
+    console.log("1");
+    console.log("patientList", patientList);
+    console.log("patientList.length", patientList.length);
 
-    for (let index = 0; index < patientList.length; index++) {
-      dispatch(fetchpatient({ token, dataName, index, graph_id: 0 }));
-    }
+    dispatch(
+      fetchpatient({
+        token,
+        dataName,
+        graph_id: 0,
+        patientLength: List.length,
+      })
+    );
+
+    console.log("2");
+    console.log("wtf", List);
     // patientList.forEach((el, index) =>
     //   dispatch(fetchpatient(token, dataName, index, 0))
     // );
@@ -124,24 +129,34 @@ function Form({ token }) {
     // console.log(patientList);
 
     // pick the zero patient to get its data and display its data as graph.
-    for (let index = 0; index < 457; index++) {
-      dispatch(fetchDataSet({ token, patient_id: index, graph_id: 0 }));
-    }
-    console.log("this is from the graph data of patient ", patientsGraphData);
 
-    // setRedirect(true);
+    dispatch(fetchDataSet({ token, patientLength: List.length, graph_id: 0 }));
+
+    console.log("this is from the graph data of patient ", patientsGraphData);
+    //
   };
 
   // ########################################################################################################################
   // # [5.] useEffect Hook   ==================================================================
-  // ########################################################################################################################
+  // ########## ##############################################################################################################
 
   useEffect(() => {
     dispatch(fetchform());
   }, []);
 
+  // first make sure the 1000 request of the patient is done then redirect
+  useEffect(() => {
+    if (status_graph == "succeeded") {
+      setRedirect(true);
+    }
+  }, [status_graph]);
+
+  // redirecting to another page
+
   useEffect(() => {
     if (redirectStatus == true) {
+      setIsVisible(true);
+      setLoadingPatient(false);
       navigate("/Interact");
       setRedirect(false);
     }
@@ -181,9 +196,6 @@ function Form({ token }) {
               onChange={handleDatasetChange}
             >
               <option value="">Select a dataset</option>
-              {console.log("This is the data list ", dataList)}
-              {console.log("hello this is the patient List", patientList)}
-              {console.log("This is the Dataset", dataSet)}
 
               {Object.entries(dataList).map(([id, value]) => (
                 <option key={id}>{value}</option>

@@ -1,6 +1,7 @@
 import React from "react";
 
 import FirstRow from "./FirstRow/FirstRow";
+import SecondRow from "./SecondRow/SecondRow";
 
 // In this component we make the layers of the page usin cytoscape js
 // and fetch the data from different slices and we make huge state for the
@@ -16,7 +17,9 @@ function Interact() {
           <FirstRow />
 
           <div className="tile bg-amber-500 row-start-2 row-end-12 col-span-1 md:col-span-2 lg:col-span-8">
-            <h1 className="tile-marker">TWO</h1>
+            <h1 className="tile-marker">
+              <SecondRow />
+            </h1>
           </div>
           {/* 
         

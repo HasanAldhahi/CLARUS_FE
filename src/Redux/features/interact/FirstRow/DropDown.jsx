@@ -27,6 +27,8 @@ const DropDown = () => {
     return state.form;
   });
 
+  const { patientDataList } = useSelector((state) => state.patient);
+
   const handleSelectChange = (event) => {
     setSelectedValue(event.target.value);
     setDropdownOpen(false); // Close the dropdown when an item is selected
@@ -61,7 +63,7 @@ const DropDown = () => {
   //   ]
   // );
 
-  console.log(selectedValue);
+  // console.log(selectedValue);
 
   return (
     <div className="relative inline-block text-left" ref={dropdownRef}>
@@ -82,10 +84,11 @@ const DropDown = () => {
             animate={{ opacity: 1, y: 0, x: 60 }}
             exit={{ opacity: 0, y: -10, x: -30 }}
             transition={{ duration: 0.2 }}
-            className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
+            className="origin-top-right absolute right-0 mt-2 w-60 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
           >
             <div className="py-1">
-              {Object.entries(patientList).map(([id, value]) => (
+              {console.log("PAtient", patientDataList)}
+              {Object.entries(patientDataList).map(([id, value]) => (
                 <a
                   key={id}
                   href="#"

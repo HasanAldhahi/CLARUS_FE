@@ -28,7 +28,6 @@ const formSlice = createSlice({
 },
 
   extraReducers: (builder) => {
-
     builder
     // for fetchin the form
       .addCase(fetchform.fulfilled, (state, action) => {
@@ -50,7 +49,6 @@ const formSlice = createSlice({
 });
 // Create an async thunk using createAsyncThunk
 export const fetchform = createAsyncThunk('form/fetchform', async () => {
-  
     return axios.get("http://127.0.0.1:5000/data/dataset_name")
     .then(res=>res.data);
 });

@@ -1,12 +1,9 @@
 import React from "react";
 import Form from "../form/Form";
 import { Link } from "react-router-dom";
-
 import { fetchSession } from "./sessionSlice";
-// YourReactComponent.js
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 function Session() {
   const dispatch = useDispatch();
   const { token, status, error } = useSelector((state) => {
@@ -25,7 +22,6 @@ function Session() {
       ></div>
     );
   }
-
   if (status === "failed") {
     return (
       <section className="flex items-center h-screen p-16 bg-gray-50 dark:bg-gray-700">
@@ -45,7 +41,6 @@ function Session() {
       </section>
     );
   }
-
   return (
     <div>
       {console.log("thsi si the data i am passing from session to Form", token)}
