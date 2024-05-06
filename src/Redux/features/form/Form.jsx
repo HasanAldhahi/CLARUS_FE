@@ -146,10 +146,16 @@ function Form({ token }) {
 
   // first make sure the 1000 request of the patient is done then redirect
   useEffect(() => {
-    if (status_graph == "succeeded") {
+    console.log("there here");
+    console.log(status_graph, status_dataSet, status);
+    if (
+      status_graph == "succeeded" &&
+      status_dataSet == "succeeded" &&
+      status == "succeeded"
+    ) {
       setRedirect(true);
     }
-  }, [status_graph]);
+  }, [status, status_dataSet, status_graph]);
 
   // redirecting to another page
 

@@ -3,7 +3,6 @@ import one from "../../imgs/one.png";
 import two from "../../imgs/two.png";
 import three from "../../imgs/three.png";
 import four from "../../imgs/four.png";
-import { Link } from "react-router-dom";
 
 const How = () => {
   return (

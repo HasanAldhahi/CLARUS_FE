@@ -10,6 +10,7 @@ const patientSlice = createSlice({
     patientsGraphData: [],
     status_dataSet: "idle",
     status_graph: "idle",
+    selected_patient: 0,
     error: null,
 
   },
@@ -17,6 +18,9 @@ const patientSlice = createSlice({
     setPatient: (state, action) => {
       state.dataList = action.payload
     },
+    setPatientNumber: (state, action) => {
+      state.selected_patient = action.payload
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -81,7 +85,7 @@ export const fetchpatient = createAsyncThunk('patient/fetchpatient',  async ({to
 export const fetchDataSet = createAsyncThunk('form/fetchDataSet',  async ({token, patientLength, graph_id} ) => {  
     const dataSet = [];
     console.log("bitch", token, patientLength, graph_id)
-    for (let patient_id = 0; patient_id <= patientLength; patient_id++) {
+    for (let patient_id = 0; patient_id < patientLength; patient_id++) {
 
  try {
   const response = await axios.get(
@@ -106,7 +110,7 @@ export const fetchDataSet = createAsyncThunk('form/fetchDataSet',  async ({token
 
     
 });
-export const  {setPatient} =  patientSlice.actions
+export const  {setPatient, setPatientNumber} =  patientSlice.actions
 export default patientSlice.reducer
 
 

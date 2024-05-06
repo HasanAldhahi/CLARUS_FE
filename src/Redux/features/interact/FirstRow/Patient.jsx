@@ -20,7 +20,7 @@ function Patient() {
     <div className="p-5">
       <div className="flex ">
         {/* First 50% width window */}
-        <div className="flex-1 h-full bg-gray-300">
+        <div className="flex-1 h-[10rem] bg-gray-300">
           <h1>Selected Patient: </h1>
           {/* Content for the first window */}
           <DropDown />
